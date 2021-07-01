@@ -111,7 +111,7 @@ if(isset($_POST["get_seleted_Category"]) || isset($_POST["selectBrand"]) || isse
 								<div class='panel-body'>
 									<img src='product_images/$pro_image' style='width:220px; height:250px;'/>
 								</div>
-								<div class='panel-heading'>Rs.$pro_price.00/-
+								<div class='panel-heading'>MXN.$pro_price.00/-
 									<button pid='$pro_id' style='float:right;' id='product' class='btn btn-danger btn-xs'>Añadir al carrito</button>
 								</div>
 							</div>
