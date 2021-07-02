@@ -48,7 +48,7 @@ if (isset($_POST["login_user_with_product"])) {
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8" id="signup_msg">
-				<!--Alert from signup form-->
+				<!--Alerta de la forma-->
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -58,7 +58,7 @@ if (isset($_POST["login_user_with_product"])) {
 				<div class="panel panel-primary">
 					<div class="panel-heading">Formato de Registro del Cliente</div>
 					<div class="panel-body">
-						<!--User Login Form-->
+						<!--Formato de login-->
 						<form onsubmit="return false" id="login">
 							<label for="email">Email</label>
 							<input type="email" class="form-control" name="email" id="email" required/>
@@ -66,7 +66,7 @@ if (isset($_POST["login_user_with_product"])) {
 							<input type="password" class="form-control" name="password" id="password" required/>
 							<p><br/></p>
 							<a href="#" style="color:#333; list-style:none;">Contraseña Olvidada</a><input type="submit" class="btn btn-success" style="float:right;" Value="Login">
-							<!--If user dont have an account then he/she will click on create account button-->
+							<!--Si el usuario no tiene cuenta se va a crear cuenta-->
 							<div><a href="customer_registration.php?register=1">Crear nueva Cuenta?</a></div>						
 						</form>
 				</div>
