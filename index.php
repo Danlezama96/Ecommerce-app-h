@@ -77,6 +77,7 @@ if(isset($_SESSION["uid"])){
 										<p><br/></p>
 										<input type="submit" class="btn btn-warning" value="Login">
 										<a href="customer_registration.php?register=1" style="color:white; text-decoration:none;">Crear cuenta</a>
+										<a href="recovery_form.php" style="color:red; text-decoration:none;">Olvide Mi Contraseña</a>
 									</form>
 								</div>
 								<div class="panel-footer" id="e_msg"></div>
