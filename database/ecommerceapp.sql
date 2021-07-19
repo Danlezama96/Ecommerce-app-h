@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-06-2021 a las 23:30:46
+-- Tiempo de generación: 08-07-2021 a las 06:42:14
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -20,7 +20,7 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `ecommerceapp`
 --
-CREATE DATABASE IF NOT EXISTS `ecommerceapp` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE IF NOT EXISTS `ecommerceapp` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `ecommerceapp`;
 
 -- --------------------------------------------------------
@@ -29,13 +29,14 @@ USE `ecommerceapp`;
 -- Estructura de tabla para la tabla `admin`
 --
 
+DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `is_active` enum('0','1') NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `is_active` enum('0','1') COLLATE utf8_unicode_ci NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `admin`
@@ -50,10 +51,11 @@ INSERT INTO `admin` (`id`, `name`, `email`, `password`, `is_active`) VALUES
 -- Estructura de tabla para la tabla `brands`
 --
 
+DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `brand_id` int(100) NOT NULL,
-  `brand_title` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `brand_title` mediumtext COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `brands`
@@ -71,13 +73,14 @@ INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
 -- Estructura de tabla para la tabla `cart`
 --
 
+DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `id` int(10) NOT NULL,
   `p_id` int(10) NOT NULL,
-  `ip_add` varchar(250) NOT NULL,
+  `ip_add` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
   `user_id` int(10) DEFAULT NULL,
   `qty` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `cart`
@@ -85,7 +88,7 @@ CREATE TABLE `cart` (
 
 INSERT INTO `cart` (`id`, `p_id`, `ip_add`, `user_id`, `qty`) VALUES
 (1, 4, '::1', 4, 1),
-(2, 21, '::1', 7, 500);
+(6, 22, '::1', 7, 0);
 
 -- --------------------------------------------------------
 
@@ -93,10 +96,11 @@ INSERT INTO `cart` (`id`, `p_id`, `ip_add`, `user_id`, `qty`) VALUES
 -- Estructura de tabla para la tabla `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `cat_id` int(100) NOT NULL,
-  `cat_title` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `cat_title` mediumtext COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `categories`
@@ -115,14 +119,15 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 -- Estructura de tabla para la tabla `orders`
 --
 
+DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `qty` int(11) NOT NULL,
-  `trx_id` varchar(255) NOT NULL,
-  `p_status` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `trx_id` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `p_status` varchar(20) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `orders`
@@ -137,20 +142,36 @@ INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `qty`, `trx_id`, `p_s
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `passwords`
+--
+
+DROP TABLE IF EXISTS `passwords`;
+CREATE TABLE `passwords` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `token` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `code` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `product_id` int(100) NOT NULL,
   `product_cat` int(11) NOT NULL,
   `product_brand` int(100) NOT NULL,
-  `product_title` varchar(255) NOT NULL,
+  `product_title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `product_price` int(100) NOT NULL,
   `product_qty` int(11) NOT NULL,
-  `product_desc` text NOT NULL,
-  `product_image` text NOT NULL,
-  `product_keywords` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `product_desc` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `product_image` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `product_keywords` mediumtext COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `products`
@@ -166,24 +187,26 @@ INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_t
 -- Estructura de tabla para la tabla `user_info`
 --
 
+DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
   `user_id` int(10) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
-  `email` varchar(300) NOT NULL,
-  `password` varchar(300) NOT NULL,
-  `mobile` varchar(10) NOT NULL,
-  `address1` varchar(300) NOT NULL,
-  `address2` varchar(300) NOT NULL,
-  `active` int(5) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `first_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `last_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `email` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `mobile` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `address1` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `address2` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(5) NOT NULL,
+  `code` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `user_info`
 --
 
-INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`, `active`) VALUES
-(7, 'Juan ', 'Hernandez', 'juanghz@gmail.com', '1e6e62234f10a0cfdc0691c673213066', '5527572092', 'Boulevard Coacalco #246', 'Estado de M', 0);
+INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`, `active`, `code`) VALUES
+(7, 'Juan ', 'Hernandez', 'juanghz@gmail.com', '1e6e62234f10a0cfdc0691c673213066', '5527572092', 'Boulevard Coacalco #246', 'Estado de M', 0, 0);
 
 --
 -- Índices para tablas volcadas
@@ -221,6 +244,12 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
+-- Indices de la tabla `passwords`
+--
+ALTER TABLE `passwords`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `products`
 --
 ALTER TABLE `products`
@@ -254,7 +283,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT de la tabla `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `categories`
@@ -267,6 +296,12 @@ ALTER TABLE `categories`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `passwords`
+--
+ALTER TABLE `passwords`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
