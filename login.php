@@ -1,7 +1,12 @@
+
 <?php
 include "db.php";
 
 session_start();
+
+if(!isset($_SESSION['intentos'])){
+	$_SESSION['intentos'] = 0;	
+}
 
 #Script de login inicia aqui
 #Si la credencial proporcionada por el usuario coincide correctamente con los datos disponibles en la base de datos, haremos eco de la cadena login_success
@@ -9,15 +14,16 @@ session_start();
 if(isset($_POST["email"]) && isset($_POST["password"])){
 	$email = mysqli_real_escape_string($con,$_POST["email"]);
 	$password = md5($_POST["password"]);
-	$sql = "SELECT * FROM user_info WHERE email = '$email' AND password = '$password'";
-	$run_query = mysqli_query($con,$sql);
-	$count = mysqli_num_rows($run_query);
-	//si el registro de usuario está disponible en la base de datos, $ count será igual a 1
-	if($count == 1){
-		$row = mysqli_fetch_array($run_query);
+	//$sqlEmail = "SELECT * FROM user_info WHERE email = '$email' AND password = '$password'";
+	$sqlEmail = "SELECT * FROM user_info WHERE email = '$email'";
+	$run_query = mysqli_query($con,$sqlEmail);
+	$row = mysqli_fetch_array($run_query);
+
+	if($row["password"] === $password){
 		$_SESSION["uid"] = $row["user_id"];
 		$_SESSION["name"] = $row["first_name"];
 		$ip_add = getenv("REMOTE_ADDR");
+		
 		//Hemos creado una cookie en la página login_form.php, por lo que si esa cookie está disponible significa que el usuario no ha iniciado sesión.
 			if (isset($_COOKIE["product_list"])) {
 				$p_list = stripcslashes($_COOKIE["product_list"]);
@@ -46,11 +52,24 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
 			}
 			//si el usuario inicia sesión desde la página, le enviaremos login_success
 			echo "login_success";
-			exit();
-		}else{
-			echo "<span style='color:red;'>Porfavor registrate antes de loguearte..!</span>";
+			unset($_SESSION['intentos']);
+			exit();		
+	}else{
+		echo "<span class='alert alert-danger'>Contraseña invalida</span>";
+		if($_SESSION['intentos'] >= 3){
+			$id=$row["user_id"];
+			$sqlActive = "UPDATE user_info SET active= 1 WHERE user_id= '$id'";
+			$run_queryActive = mysqli_query($con,$sqlActive);
+			$_SESSION['intentos'] = 0;	
+			echo "<span class='alert alert-danger'><stronge>Cuenta Bloqueada </stronge> </span>";
 			exit();
 		}
+		++$_SESSION['intentos'];
+		exit();
+	}
+
+	
+
 	
 }
 

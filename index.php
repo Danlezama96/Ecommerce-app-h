@@ -67,12 +67,13 @@ if(isset($_SESSION["uid"])){
 					<ul class="dropdown-menu">
 						<div style="width:300px;">
 							<div class="panel panel-primary">
-								<div class="panel-heading">Login</div>
 								<div class="panel-heading">
-									<form onsubmit="return false" id="login">
-										<label for="email">Email</label>
+									<h4>Login</h4>
+								<div class="panel-heading">
+									<form  onsubmit="return false" id="login">
+										<label class="form-label" for="email">Email</label>
 										<input type="email" class="form-control" name="email" id="email" required/>
-										<label for="email">Password</label>
+										<label class="form-label" for="email">Password</label>
 										<input type="password" class="form-control" name="password" id="password" required/>
 										<p><br/></p>
 										<input type="submit" class="btn btn-warning" value="Login">
@@ -80,7 +81,10 @@ if(isset($_SESSION["uid"])){
 										<a href="recovery_form.php" style="color:red; text-decoration:none;">Olvide Mi Contraseña</a>
 									</form>
 								</div>
-								<div class="panel-footer" id="e_msg"></div>
+								</div>
+								<div style='padding:2.2rem;' id="e_msg">
+
+								</div>
 							</div>
 						</div>
 					</ul>
