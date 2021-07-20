@@ -19,7 +19,8 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
 	$run_query = mysqli_query($con,$sqlEmail);
 	$row = mysqli_fetch_array($run_query);
 
-	if($row["password"] === $password){
+
+	if($row["password"] === $password && $row["active"] == 2){
 		$_SESSION["uid"] = $row["user_id"];
 		$_SESSION["name"] = $row["first_name"];
 		$ip_add = getenv("REMOTE_ADDR");
@@ -52,20 +53,27 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
 			}
 			//si el usuario inicia sesión desde la página, le enviaremos login_success
 			echo "login_success";
-			unset($_SESSION['intentos']);
+			
+			$_SESSION['intentos'] = 0;
 			exit();		
 	}else{
-		echo "<span class='alert alert-danger'>Contraseña invalida</span>";
+
+		
+		if($_SESSION['intentos'] < 3 && $row["active"]!=1){
+			echo "<span class='alert alert-warning'>Contraseña invalida </span>";
+			echo $_SESSION['intentos'];
+		}
+		
 		if($_SESSION['intentos'] >= 3){
 			$id=$row["user_id"];
 			$sqlActive = "UPDATE user_info SET active= 1 WHERE user_id= '$id'";
 			$run_queryActive = mysqli_query($con,$sqlActive);
-			$_SESSION['intentos'] = 0;	
-			echo "<span class='alert alert-danger'><stronge>Cuenta Bloqueada </stronge> </span>";
+			$_SESSION['intentos'] = 0;
+			echo "<span class='alert alert-danger'><stronge>Cuenta bloqueada </stronge> </span>";
 			exit();
 		}
 		++$_SESSION['intentos'];
-		exit();
+	
 	}
 
 	

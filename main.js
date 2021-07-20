@@ -118,9 +118,9 @@ utilizado para redirigir al usuario de la página de inicio a la página profile
 			method:	"POST",
 			data	:$("#login").serialize(),
 			success	:function(data){
-				if(data == "login_success"){
+				if(data.trim() === "login_success"){
 					window.location.href = "profile.php";
-				}else if(data == "cart_login"){
+				}else if(data.trim() === "cart_login"){
 					window.location.href = "cart.php";
 				}else{
 					$("#e_msg").html(data);
@@ -301,7 +301,7 @@ checkOutDetails se usa para mostrar el artículo del carrito en la página Cart.
 		$('.total').each(function(){
 			net_total += ($(this).val()-0);
 		})
-		$('.net_total').html("Total : "+ CURRENCY + " " +net_total);
+		$('.net_total').html("Total : "+ "MXN Pesos $" + " " +net_total);
 	}
 
 	//remover producto del carrito

@@ -70,11 +70,11 @@ if (isset($_POST["login_user_with_product"])) {
 							<div><a href="customer_registration.php?register=1">Crear nueva Cuenta?</a></div>						
 						</form>
 				</div>
-				<div class="panel-footer"><div id="e_msg"></div></div>
 			</div>
 		</div>
 		<div class="col-md-4"></div>
 	</div>
+	<div class="panel-footer"><p id="e_msg"></p></div>
 </body>
 </html>
 

@@ -69,20 +69,28 @@ if(isset($_SESSION["uid"])){
 							<div class="panel panel-primary">
 								<div class="panel-heading">
 									<h4>Login</h4>
-								<div class="panel-heading">
+								<div class="panel-body">
 									<form  onsubmit="return false" id="login">
 										<label class="form-label" for="email">Email</label>
 										<input type="email" class="form-control" name="email" id="email" required/>
 										<label class="form-label" for="email">Password</label>
 										<input type="password" class="form-control" name="password" id="password" required/>
 										<p><br/></p>
-										<input type="submit" class="btn btn-warning" value="Login">
-										<a href="customer_registration.php?register=1" style="color:white; text-decoration:none;">Crear cuenta</a>
-										<a href="recovery_form.php" style="color:red; text-decoration:none;">Olvide Mi Contraseña</a>
+										<input type="submit" class="btn btn-warning btn-block" value="Login">
 									</form>
+									
 								</div>
 								</div>
-								<div style='padding:2.2rem;' id="e_msg">
+								<div class="row">
+								<div class="col-md-6 pt-2">
+									<a href="customer_registration.php?register=1" style="color:black; text-decoration:none;">Crear cuenta</a>
+										
+									</div>
+									<div class="col-md-6 pt-2">
+									<a href="recovery_form.php" style="color:black; text-decoration:none;">Olvide mi contraseña</a>
+									</div>
+								</div>
+								<div class="col-md-12" style='padding:2.2rem;' id="e_msg">
 
 								</div>
 							</div>
