@@ -42,6 +42,4 @@
   </head>
 
  <body>
-   
- </body>
-   </html>
+
