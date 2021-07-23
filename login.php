@@ -16,11 +16,13 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
 	$password = md5($_POST["password"]);
 	//$sqlEmail = "SELECT * FROM user_info WHERE email = '$email' AND password = '$password'";
 	$sqlEmail = "SELECT * FROM user_info WHERE email = '$email'";
-	$run_query = mysqli_query($con,$sqlEmail);
+	$run_query = mysqli_query($con, $sqlEmail);
 	$row = mysqli_fetch_array($run_query);
+	$have_email = mysqli_num_rows($run_query);
 
-
-	if($row["password"] === $password && $row["active"] == 2){
+	if($have_email ==1){
+		
+	if($row["password"] === $password && $row["active"] == 2 ){
 		$_SESSION["uid"] = $row["user_id"];
 		$_SESSION["name"] = $row["first_name"];
 		$ip_add = getenv("REMOTE_ADDR");
@@ -74,6 +76,10 @@ if(isset($_POST["email"]) && isset($_POST["password"])){
 		}
 		++$_SESSION['intentos'];
 	
+	}
+	}else{
+		echo "<span style='color:red;'>Porfavor registrate antes de loguearte..!</span>";
+		exit();
 	}
 
 	
