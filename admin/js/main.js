@@ -31,7 +31,7 @@ $(document).ready(function(){
 				var resp = $.parseJSON(response);
 				if (resp.status == 202) {
 					$("#admin-register-form").trigger("reset");
-					window.location.href = window.origin+"/ecommerce-app-h/admin/index.php";
+					window.location.href = window.origin+"/admin/index.php";
 				}else if(resp.status == 303){
 					$(".message").html('<span class="text-danger">'+resp.message+'</span>');
 				}
