@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-07-2021 a las 06:42:14
+-- Tiempo de generación: 23-07-2021 a las 03:57:00
 -- Versión del servidor: 10.4.19-MariaDB
 -- Versión de PHP: 8.0.7
 
@@ -29,7 +29,6 @@ USE `ecommerceapp`;
 -- Estructura de tabla para la tabla `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin` (
   `id` int(11) NOT NULL,
   `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -51,7 +50,6 @@ INSERT INTO `admin` (`id`, `name`, `email`, `password`, `is_active`) VALUES
 -- Estructura de tabla para la tabla `brands`
 --
 
-DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `brand_id` int(100) NOT NULL,
   `brand_title` mediumtext COLLATE utf8_unicode_ci NOT NULL
@@ -73,7 +71,6 @@ INSERT INTO `brands` (`brand_id`, `brand_title`) VALUES
 -- Estructura de tabla para la tabla `cart`
 --
 
-DROP TABLE IF EXISTS `cart`;
 CREATE TABLE `cart` (
   `id` int(10) NOT NULL,
   `p_id` int(10) NOT NULL,
@@ -96,7 +93,6 @@ INSERT INTO `cart` (`id`, `p_id`, `ip_add`, `user_id`, `qty`) VALUES
 -- Estructura de tabla para la tabla `categories`
 --
 
-DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `cat_id` int(100) NOT NULL,
   `cat_title` mediumtext COLLATE utf8_unicode_ci NOT NULL
@@ -119,7 +115,6 @@ INSERT INTO `categories` (`cat_id`, `cat_title`) VALUES
 -- Estructura de tabla para la tabla `orders`
 --
 
-DROP TABLE IF EXISTS `orders`;
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
@@ -145,7 +140,6 @@ INSERT INTO `orders` (`order_id`, `user_id`, `product_id`, `qty`, `trx_id`, `p_s
 -- Estructura de tabla para la tabla `passwords`
 --
 
-DROP TABLE IF EXISTS `passwords`;
 CREATE TABLE `passwords` (
   `id` int(11) NOT NULL,
   `email` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -154,13 +148,23 @@ CREATE TABLE `passwords` (
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `passwords`
+--
+
+INSERT INTO `passwords` (`id`, `email`, `token`, `code`, `date`) VALUES
+(33, 'juanghz@gmail.com', '5dfc425746', 2692, '2021-07-08 23:44:49'),
+(34, 'danlezama@msn.com', 'cdfaf0b6b2', 1573, '2021-07-09 02:00:50'),
+(35, 'Danlezama9621@gmail.com', '76d2dc8288', 8131, '2021-07-21 01:56:23'),
+(36, 'juanghz@gmail.com', 'cdbcdd0999', 7617, '2021-07-23 00:23:15'),
+(37, 'juanghz@gmail.com', '6a2bc4d038', 2975, '2021-07-23 01:51:53');
+
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `products`
 --
 
-DROP TABLE IF EXISTS `products`;
 CREATE TABLE `products` (
   `product_id` int(100) NOT NULL,
   `product_cat` int(11) NOT NULL,
@@ -187,7 +191,6 @@ INSERT INTO `products` (`product_id`, `product_cat`, `product_brand`, `product_t
 -- Estructura de tabla para la tabla `user_info`
 --
 
-DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info` (
   `user_id` int(10) NOT NULL,
   `first_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -206,7 +209,8 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_id`, `first_name`, `last_name`, `email`, `password`, `mobile`, `address1`, `address2`, `active`, `code`) VALUES
-(7, 'Juan ', 'Hernandez', 'juanghz@gmail.com', '1e6e62234f10a0cfdc0691c673213066', '5527572092', 'Boulevard Coacalco #246', 'Estado de M', 0, 0);
+(7, 'Juan ', 'Hernandez', 'juanghz@gmail.com', '098f6bcd4621d373cade4e832627b4f6', '5527572092', 'Boulevard Coacalco #246', 'Estado de M', 2, 0),
+(8, 'Dan Israel', 'Olarra', 'danlezama9621@gmail.com', 'dcd9d4c276ce710319c20eaa4acd29e5', '5558984376', 'Boulevard De Las Rosas, 221', '221', 2, 0);
 
 --
 -- Índices para tablas volcadas
@@ -301,7 +305,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT de la tabla `passwords`
 --
 ALTER TABLE `passwords`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
@@ -313,7 +317,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT de la tabla `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas
