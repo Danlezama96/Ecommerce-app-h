@@ -1,38 +1,39 @@
 <?php session_start(); ?>
 <?php include_once("./templates/top.php"); ?>
 <?php include_once("./templates/navbar.php"); ?>
-<div class="container-fluid">
-  <div class="row">
-    
-    <?php include "./templates/sidebar.php"; ?>
 
-
-      <div class="row">
-      	<div class="col-10">
-      		<h2>Administrar Categoria</h2>
-      	</div>
-      	<div class="col-2">
-      		<a href="#" data-toggle="modal" data-target="#add_category_modal" class="btn btn-warning btn-sm">Añadir Categoria de Producto</a>
-      	</div>
-      </div>
-      
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
-          <tbody id="category_list">
-          </tbody>
-        </table>
-      </div>
-    </main>
+<div class="row">
+  <div class="col-2">
+  <?php include "./templates/sidebar.php"; ?>
   </div>
+  
+        <div class="col-10">
+            <div class="container pt-5">
+        
+                      <div class="col-10">
+                        <h2>Administrar Categoría</h2>
+                      </div>
+                      <div class="d-flex justify-content-end p-3">
+                          <button type="button" class="btn btn-warning add-product" data-bs-toggle="modal" data-bs-target="#add_category_modal">
+                          Añadir Categoría de Producto
+                          </button>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table table-striped table-sm">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Nombre</th>
+                              <th>Accion</th>
+                            </tr>
+                          </thead>
+                          <tbody id="category_list">
+                          </tbody>
+                        </table>
+                      </div>
+            </div>
+         </div>
 </div>
-
 
 
 <!-- Modal -->

@@ -197,7 +197,7 @@ CREATE TABLE `user_info` (
   `mobile` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `address1` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
   `address2` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
-  `active` int(5) NOT NULL,
+  `active` int(5) NOT NULL DEFAULT 2,
   `code` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

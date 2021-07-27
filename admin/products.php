@@ -1,46 +1,50 @@
 <?php session_start(); ?>
 <?php include_once("./templates/top.php"); ?>
 <?php include_once("./templates/navbar.php"); ?>
-<div class="container-fluid">
-  <div class="row">
-    
-    <?php include "./templates/sidebar.php"; ?>
 
-      <div class="row">
-      	<div class="col-10">
-      		<h2>Lista de Productos</h2>
-      	</div>
-      	<div class="col-2">
-      		<a href="#" data-toggle="modal" data-target="#add_product_modal" class="btn btn-warning btn-sm">Añadir Productos</a>
-      	</div>
-      </div>
-      
-      <div class="table-responsive">
-        <table class="table table-striped table-sm">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Nombre</th>
-              <th>Imagen</th>
-              <th>Precio</th>
-              <th>Cantidad</th>
-              <th>Categoria</th>
-              <th>Marca</th>
-              <th>Accion</th>
-            </tr>
-          </thead>
-          <tbody id="product_list">
-          </tbody>
-        </table>
-      </div>
-    </main>
+
+<div class="row">
+  <div class="col-2">
+  <?php include "./templates/sidebar.php"; ?>
   </div>
+  
+        <div class="col-10">
+            <div class="container pt-5">
+        
+                      <div class="col-10">
+                        <h2>Lista de Productos</h2>
+                      </div>
+                      <div class="d-flex justify-content-end p-3">
+                          <button type="button" class="btn btn-warning add-product" data-bs-toggle="modal" data-bs-target="#add_product_modal">
+                          Añadir Productos
+                          </button>
+                      </div>
+                                <div class="table-responsive">
+                                      <table class="table table-striped table-sm">
+                                        <thead>
+                                          <tr>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Imagen</th>
+                                            <th>Precio</th>
+                                            <th>Cantidad</th>
+                                            <th>Categoria</th>
+                                            <th>Marca</th>
+                                            <th>Accion</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody id="product_list">
+                                        </tbody>
+                                      </table>
+                                    </div>
+            </div>
+         </div>
 </div>
 
 
 
 <!-- Añadir producto modal -->
-<div class="modal fade" id="add_product_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade pt-5" id="add_product_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
