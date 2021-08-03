@@ -23,7 +23,7 @@ $(document).ready(function(){
 									          '<td>'+value.email+'</td>'+
 									          '<td>'+value.mobile+'</td>'+
 									          '<td>'+value.address1+'<br>'+value.address2+'</td>'+
-											  '<td>'+value.active  +'</td>'+
+											  '<td>'+(value.active==2 ? 'Activo': 'Bloqueado'  ) +'</td>'+
 											  '<td><a class="btn btn-sm btn-info edit-customer"><span style="display:none;">'+JSON.stringify(value)+'</span><i class="fas fa-pencil-alt"></i></a>&nbsp;<a cid="'+value.user_id+'" class="btn btn-sm btn-danger delete-customer"><i class="fas fa-trash-alt"></i></a></td>'+
 									       '</tr>'
 					});

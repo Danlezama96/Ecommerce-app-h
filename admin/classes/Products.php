@@ -89,7 +89,11 @@ class Products
 			if ($file['size'] > (1024 * 2)) {
 				
 				$uniqueImageName = time()."_".$file['name'];
-				if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT']."/ecommerce-app-h/product_images/".$uniqueImageName)) {
+
+//Se descomenta para la correr en localhost
+				// if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT']."/ecommerce-app-h/product_images/".$uniqueImageName)) {
+//Se descomenta para la nube heroku
+					if (move_uploaded_file($file['tmp_name'], $_SERVER['DOCUMENT_ROOT']."/product_images/".$uniqueImageName)) {
 					
 					$q = $this->con->query("INSERT INTO `products`(`product_cat`, `product_brand`, `product_title`, `product_qty`, `product_price`, `product_desc`, `product_image`, `product_keywords`) VALUES ('$category_id', '$brand_id', '$product_name', '$product_qty', '$product_price', '$product_desc', '$uniqueImageName', '$product_keywords')");
 

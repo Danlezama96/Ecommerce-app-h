@@ -23,7 +23,7 @@
 													<th>Email</th>
 													<th>Telefono</th>
 													<th>Direccion</th>
-													<th>Activo</th>
+													<th>Estado Cta.</th>
 													<th>Acción</th>
 													</tr>
 												</thead>
@@ -79,7 +79,7 @@
                 <input type="text" name="address2" class="form-control" placeholder="Escribe dirección">
               </div>
 			  <div class="form-group">
-                          <label class="form-label">Activo</label>
+                          <label class="form-label">Estado Cta.</label>
                           <select type="text" class="form-control active_list" name="active">
                             <option value="">Seleccionar</option>
                         <option value="2">Activo</option>
