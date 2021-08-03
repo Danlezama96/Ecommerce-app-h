@@ -32,9 +32,9 @@ $(document).ready(function(){
 				if (resp.status == 202) {
 					$("#admin-register-form").trigger("reset");
 					//corre en local
-					window.location.href = window.origin+"/ecommerce-app-h/admin/index.php";
+				//	window.location.href = window.origin+"/ecommerce-app-h/admin/index.php";
 					//corre en heroku 
-				//	window.location.href = window.origin+"/admin/index.php";
+					window.location.href = window.origin+"/admin/index.php";
 				}else if(resp.status == 303){
 					$(".message").html('<span class="text-danger">'+resp.message+'</span>');
 				}

@@ -17,15 +17,15 @@ $(document).ready(function(){
 					var customersHTML = "";
 
 					$.each(resp.message, function(index, value){
-
 						customersHTML += '<tr>'+
 									          '<td>#</td>'+
 									          '<td>'+value.first_name+' '+value.last_name+'</td>'+
 									          '<td>'+value.email+'</td>'+
 									          '<td>'+value.mobile+'</td>'+
 									          '<td>'+value.address1+'<br>'+value.address2+'</td>'+
+											  '<td>'+value.active  +'</td>'+
+											  '<td><a class="btn btn-sm btn-info edit-customer"><span style="display:none;">'+JSON.stringify(value)+'</span><i class="fas fa-pencil-alt"></i></a>&nbsp;<a cid="'+value.user_id+'" class="btn btn-sm btn-danger delete-customer"><i class="fas fa-trash-alt"></i></a></td>'+
 									       '</tr>'
-
 					});
 
 					$("#customer_list").html(customersHTML);
@@ -76,6 +76,81 @@ $(document).ready(function(){
 		})
 		
 	}
+
+
+	$(document.body).on("click", ".edit-customer", function(){
+		var cli = $.parseJSON($.trim($(this).children("span").html()));
+		$("input[name='user_id']").val(cli.user_id);
+		$("input[name='first_name']").val(cli.first_name);
+		$("input[name='last_name']").val(cli.last_name);
+		$("input[name='email']").val(cli.email);
+		$("input[name='password']").val(cli.password);
+		$("input[name='mobile']").val(cli.mobile);
+		$("input[name='address1']").val(cli.address1);
+		$("input[name='address2']").val(cli.address2);
+		$("select[name='active']").val(cli.active);
+		
+
+		$("#edit_customer_modal").modal('show');
+
+		
+
+	});
+
+	$(".edit-customer-btn").on('click', function(){
+		$.ajax({
+			url : '../admin/classes/Customers.php',
+			method : 'POST',
+			data : new FormData($("#edit-customer-form")[0]),
+			contentType : false,
+			cache : false,
+			processData : false,
+			success : function(response){
+				console.log('respuesta',response)
+				var resp = $.parseJSON(response);
+				if (resp.status == 202) {
+					$("#edit-customer-form").trigger("reset");
+					$("#edit_customer_modal").modal('hide');
+					getCustomers();
+					alert(resp.message);
+				}else if(resp.status == 303){
+					alert(resp.message);
+				}
+				$("#edit_category_modal").modal('hide');
+			}
+		})
+
+	});
+
+
+	$(document.body).on('click', '.delete-customer', function(){
+
+		var cid = $(this).attr('cid');
+		if (confirm("Seguro que quieres borrar este cliente?")) {
+			$.ajax({
+
+				url : '../admin/classes/Customers.php',
+				method : 'POST',
+				data : {DELETE_CUSTOMER: 1, cid:cid},
+				success : function(response){
+					console.log(response);
+					var resp = $.parseJSON(response);
+					if (resp.status == 202) {
+						getCustomers();
+					}else if (resp.status == 303) {
+						alert(resp.message);
+					}
+				}
+
+			});
+		}else{
+			alert('Cancelado');
+		}
+		
+
+	});
+
+
 
 
 });

@@ -45,7 +45,7 @@
           <li class="nav-item">
             <a class="nav-link <?php echo ($page == 'customers.php') ? 'active' : ''; ?>" href="customers.php">
               <span data-feather="users"></span>
-              Clienets
+              Clientes
             </a>
           </li>
         </ul>

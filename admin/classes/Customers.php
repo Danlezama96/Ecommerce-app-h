@@ -16,7 +16,7 @@ class Customers
 	}
 
 	public function getCustomers(){
-		$query = $this->con->query("SELECT `user_id`, `first_name`, `last_name`, `email`, `mobile`, `address1`, `address2` FROM `user_info`");
+		$query = $this->con->query("SELECT `user_id`, `first_name`, `last_name`, `email`, `mobile`, `address1`, `address2`, `active`, `password` FROM `user_info`");
 		$ar = [];
 		if (@$query->num_rows > 0) {
 			while ($row = $query->fetch_assoc()) {
@@ -39,6 +39,47 @@ class Customers
 		}
 		return ['status'=> 303, 'message'=> 'Sin ordenes todavia'];
 	}
+
+
+	public function updateCustomer($post = null){
+		extract($post);
+		if (!empty($first_name) && !empty($last_name) && !empty($email)&& !empty($password) && !empty($mobile) && !empty($address1) && !empty($address2) && !empty($active) && !empty($user_id)) {
+			$q = $this->con->query("UPDATE user_info SET first_name = '$first_name', 
+														last_name = '$last_name',
+														email = '$email',
+														password = '$password',
+														mobile = '$mobile',
+														address1 = '$address1',
+														address2 = '$address2',
+														active = '$active' 
+														WHERE user_id = '$user_id'");
+			if ($q) {
+				return ['status'=> 202, 'message'=> 'Cliente actualizada'];
+			}else{
+				return ['status'=> 202, 'message'=> 'Fallo al ejecutar query'];
+			}
+			
+		}else{
+			return ['status'=> 303, 'message'=>'Correo invalido'];
+		}
+
+	}
+
+
+	public function deleteCustomer($cid = null){
+		if ($cid != null) {
+			$q = $this->con->query("DELETE FROM user_info WHERE user_id = '$cid'");
+			if ($q) {
+				return ['status'=> 202, 'message'=> 'Cliente removido'];
+			}else{
+				return ['status'=> 202, 'message'=> 'Fallo al ejecutar query'];
+			}
+			
+		}else{
+			return ['status'=> 303, 'message'=>'Id de cliente invalido'];
+		}
+
+	}
 	
 
 }
@@ -60,5 +101,27 @@ if (isset($_POST["GET_CUSTOMER_ORDERS"])) {
 	}
 }
 
+if (isset($_POST['edit_customer'])) {
+	if (!empty($_POST['user_id'])) {
+		$p = new Customers();
+		echo json_encode($p->updateCustomer($_POST));
+		exit();
+	}else{
+		echo json_encode(['status'=> 303, 'message'=> 'Detalles invalidos']);
+		exit();
+	}
+}
+
+
+if (isset($_POST['DELETE_CUSTOMER'])) {
+	if (!empty($_POST['cid'])) {
+		$p = new Customers();
+		echo json_encode($p->deleteCustomer($_POST['cid']));
+		exit();
+	}else{
+		echo json_encode(['status'=> 303, 'message'=> 'Detalles invalidos']);
+		exit();
+	}
+}
 
 ?>
