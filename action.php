@@ -289,7 +289,7 @@ if (isset($_POST["Common"])) {
 						</form>
 						<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 							<input type="hidden" name="cmd" value="_cart">
-							<input type="hidden" name="business" value="">
+							<input type="hidden" name="business" value="shoppingcart@ecommerceastro.com">
 							<input type="hidden" name="upload" value="1">';
 							  
 							$x=0;
